@@ -128,7 +128,7 @@
 	<services:module-loader>
 		<ml-factories:class-modules>
 			<ml-factories:search-packages type="$1"
-				packages="com.qk.qingka.webx.common.module.*" />
+				packages="com.hzsuwang.hzcms.webx.common.module.*" />
 		</ml-factories:class-modules>
 	</services:module-loader>
 

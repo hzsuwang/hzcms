@@ -1,5 +1,5 @@
 #!/bin/sh
-pname="qksms"
+pname="hzcms"
 PID=`cat /usr/local/output/${pname}/admin/pid`
 kill $PID
 sleep 2

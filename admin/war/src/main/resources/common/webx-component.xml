@@ -22,8 +22,8 @@
 		<form-tool />
 		<control-tool />
 		<uris-tool />
-		<bean-tool id="qkDateUtil" class="com.qk.qingka.util.QkDateUtil" scope="global" />
-		<bean-tool id="qkStringUtil" class="com.qk.qingka.util.QkStringUtil" scope="global" />
+		<bean-tool id="qkDateUtil" class="com.hzsuwang.hzcms.common.util.DateUtil" scope="global" />
+		<bean-tool id="qkStringUtil" class="com.hzsuwang.hzcms.common.util.StringUtil" scope="global" />
 	</services:pull>
 
 </beans:beans>

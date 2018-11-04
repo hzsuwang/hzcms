@@ -1,17 +1,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.qk.qingka</groupId>
-		<artifactId>qksms.all</artifactId>
+		<groupId>com.hzsuwang.hzcms</groupId>
+		<artifactId>hzcms.all</artifactId>
 		<version>1.0</version>
 		<relativePath>../../pom.xml</relativePath>
 	</parent>
-	<groupId>com.qk.qingka</groupId>
-	<artifactId>qksms.data.domain</artifactId>
+	<groupId>com.hzsuwang.hzcms</groupId>
+	<artifactId>hzcms.data.domain</artifactId>
 	<version>1.0</version>
 	<packaging>jar</packaging>
 
-	<name>qksms.data.domain</name>
+	<name>hzcms.data.domain</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
