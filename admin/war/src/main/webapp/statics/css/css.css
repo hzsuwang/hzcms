@@ -1,0 +1,168 @@
+/* CSS Document */
+
+body{
+	background:#CCC;
+	margin:0px;
+	padding:0px;}
+.clear{
+	clear:both;}
+
+#pageone{
+	background:#FFF;
+	margin:0px;
+	padding:0px;}
+.page.header{
+	margin:0px;
+	padding:0px;
+	background:#FFF;}
+
+
+.ui-content{
+	padding:0px;}
+.questionstyle{
+	border:1px solid #b3a4b0;
+	border-bottom:hidden;
+}
+.qsttitle{
+	margin-top:10px;
+	margin-bottom:10px;
+	margin-left:20px;
+    font-size:16px; 
+    color:#999999;
+}
+.qstlist{
+	border:1px solid #e5e4e3;
+	border-top:hidden;
+	height:38px;
+	padding-left:25px;
+    background:#FFF;
+	font-size:18px;
+	padding-top:20px;
+	color:#555555;
+}
+.qstshow img{
+	float:right;
+	margin-right:20px;
+}
+ul{
+	margin:0px;
+	padding:0px;}
+ul li{
+	list-style:none;}
+
+.questionstyle a{
+	color:#555555;
+	text-decoration:none;
+}
+
+
+.qstlist:nth-of-type(odd){ background:#f7f7f7;}������
+.qstlist:nth-of-type(even){ background:#ffffff;}ż����
+
+
+
+.content_top1{
+	margin:0px;
+	padding:0px;
+}
+
+.content_top1 ul{
+	width:100%;
+	background:#fff;
+	margin:0px;
+	padding:0px;
+	overflow:hidden;
+}
+.content_top1 ul li{
+	float:left;
+	height:35px;
+	text-align:center;
+	font-size:18px;
+	padding-top:10px;
+	border-right:1px solid #c8d5c7;
+	}
+.content_top1 ul li a{
+		color:#d5d5d5; 
+		text-decoration:none;
+	}
+.content_top1 ul li a:hover{
+		color:#FCF; 
+		text-decoration:none;
+	}
+.infoshow_01,infoshow_02{
+	margin:0px;
+	padding:0px;
+	width:100%; 
+    overflow:hidden
+}
+
+.left_pic{
+	width:66%; 
+	float:left;
+	z-index:0;
+	position:relative;
+}
+.left_pic img,right_pic img{
+	z-index:0;
+     position:relative;
+	}
+
+.infoshow_01_paiming{
+	z-index:10;
+	position:absolute;
+	bottom:0; 
+	background:rgba(0,0,0,0.5);
+    width:100%;
+	line-height:28px;
+	color:#ffffff;
+}
+.right_pic{
+	width:34%;
+	float:left; 
+}
+font{	
+	font-size:15px; 
+	margin-left:8px;
+	font-family:"宋体";
+}
+.infoshow_01_paiming img{
+		margin-left:5px;
+	}
+
+.infoshow_02_pic{
+	width:25%;
+	float:left;
+	z-index:0;
+    position:relative;
+ }
+ .infoshow_02_pic img{
+	z-index:0;
+	position:relative; 
+}
+.infoshow_02_paiming{
+	z-index:10; 
+	position:absolute;
+	bottom:0; 
+	background:rgba(0,0,0,0.5);
+	width:100%; 
+    line-height:28px;
+	color:#ffffff;
+}
+img[data-src], img[data-rsrc] {
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.loadbar {
+    text-align: center;
+    height: 40px;
+    vertical-align: middle;
+    line-height: 40px;
+    border-top: 1px solid #EEE;
+    background: none repeat scroll 0% 0% #FFF;
+}
+.limit{
+  text-overflow:ellipsis; 
+  white-space:nowrap; 
+  overflow:hidden;
+}

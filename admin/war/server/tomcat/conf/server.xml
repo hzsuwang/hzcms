@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+
+<Server port="17003" shutdown="SHUTDOWN">
+  <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on" />
+  <Listener className="org.apache.catalina.core.JasperListener" />
+  <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener" />
+  <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener" />
+  <Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener" />
+
+
+  <GlobalNamingResources>
+    <!-- Editable user database that can also be used by
+         UserDatabaseRealm to authenticate users
+    -->
+    <Resource name="UserDatabase" auth="Container"
+              type="org.apache.catalina.UserDatabase"
+              description="User database that can be updated and saved"
+              factory="org.apache.catalina.users.MemoryUserDatabaseFactory"
+              pathname="conf/tomcat-users.xml" />
+  </GlobalNamingResources>
+
+
+
+  <Service name="Catalina">
+    
+	      
+      <!--  配置线程池，线程最大300，最小50. 在Connector中引用， 缺省150 -->
+      <Executor name="tomcatThreadPool" namePrefix="catalina-exec-"
+        maxThreads="300" minSpareThreads="50" />
+        
+        
+    <Connector executor="tomcatThreadPool"  port="17001" protocol="HTTP/1.1"
+               connectionTimeout="20000"
+               redirectPort="17433" />
+
+	
+	
+    <Engine name="Catalina" defaultHost="localhost">
+
+      <Realm className="org.apache.catalina.realm.LockOutRealm">
+        <!-- This Realm uses the UserDatabase configured in the global JNDI
+             resources under the key "UserDatabase".  Any edits
+             that are performed against this UserDatabase are immediately
+             available for use by the Realm.  -->
+        <Realm className="org.apache.catalina.realm.UserDatabaseRealm"
+               resourceName="UserDatabase"/>
+      </Realm>
+
+      <Host name="localhost"  appBase="webapps"
+            unpackWARs="false" autoDeploy="false">
+           <Valve className="org.apache.catalina.valves.AccessLogValve" directory="/usr/local/output/qksms/clearing/tomcat_logs"
+               prefix="localhost_access_log." suffix=".txt"
+               pattern="%h %l %u %t &quot;%r&quot; %s byte= %b  time= %D" />
+      </Host>
+    </Engine>
+  </Service>
+</Server>

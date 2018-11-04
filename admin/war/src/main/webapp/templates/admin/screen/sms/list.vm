@@ -1,0 +1,159 @@
+<div class="larry-grid layui-anim layui-anim-upbit larryTheme-A" >
+    <div class="larry-personal" >
+        <div class="layui-tab" >
+            <blockquote class="layui-elem-quote mylog-info-tit">
+                <div class="layui-inline">
+                    <form class="layui-form" id="resSearchForm"  action="/admin/sms/list.htm">
+                        <div class="layui-input-inline" style="width:145px;">
+                            <input type="text" name="phone" value="$!{phone}" placeholder="请输入手机号" class="layui-input search_input">
+                        </div>
+                        <input type="submit" class="layui-btn layui-icon larry-icon larry-chaxun7"  name="查询" value="查询">
+                    </form>
+                </div>
+
+            </blockquote>
+            <div class="larry-separate"></div>
+            <!-- 菜单列表 -->
+            <div class="layui-tab-item layui-show" style="padding: 10px 15px;"> ##列表开始
+
+                <table id="resTableList" lay-filter="resTableId"></table>
+                <div class="layui-form layui-border-box layui-table-view" lay-filter="LAY-table-1" style="">
+                    <div class="layui-table-box">
+                        <div class="layui-table-header">
+                            <table cellspacing="0" cellpadding="0" border="1" class="layui-table" lay-skin="row" lay-size="sm" lay-even="" style="width: 100%;">
+                                <thead>
+                                <tr>
+                                    <th data-field="0">
+                                        <div class="layui-table-cell laytable-cell-1-0 laytable-cell-numbers"><span>ID</span></div>
+                                    </th>
+
+                                    <th data-field="resName">
+                                        <div class="layui-table-cell laytable-cell-1-resName" align="center"><span>手机号</span></div>
+                                    </th>
+                                    <th data-field="resModelCode">
+                                        <div class="layui-table-cell laytable-cell-1-resModelCode" align="center"><span>发送结果值</span></div>
+                                    </th>
+                                    <th data-field="resStatus">
+                                        <div class="layui-table-cell laytable-cell-1-resStatus" align="center"><span>短信内容</span></div>
+                                    </th>
+                                    <th data-field="resLinkAddress">
+                                        <div class="layui-table-cell laytable-cell-1-resLinkAddress" align="center"><span>发送成功状态</span></div>
+                                    </th>
+
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="layui-table-body layui-table-main">
+                            <table cellspacing="0" cellpadding="0" border="1" class="layui-table" lay-skin="row" lay-size="sm" lay-even="" style="width: 100%;">
+                                <tbody>
+
+                                #foreach($!smsFlow in $query.dataList)
+                                <tr data-index="$!velocityCount">
+                                    <td data-field="0">
+                                        <div class="layui-table-cell laytable-cell-1-0 laytable-cell-numbers">$!smsFlow.id</div>
+                                    </td>
+                                    <td data-field="resName" align="center">
+                                        <div class="layui-table-cell laytable-cell-1-resName">$!smsFlow.phone</div>
+                                    </td>
+                                    <td data-field="resModelCode" align="center">
+                                        <div class="layui-table-cell laytable-cell-1-resModelCode">$!smsFlow.result</div>
+                                    </td>
+                                    <td data-field="resStatus" align="center">
+                                        <div class="layui-table-cell laytable-cell-1-resStatus">$!smsFlow.content</div>
+                                    </td>
+                                    <td data-field="resLinkAddress" align="center">
+                                        <div class="layui-table-cell laytable-cell-1-resLinkAddress">
+                                            #if($!smsFlow.status==1)
+                                                成功
+                                            #else
+                                                失败
+                                            #end
+                                            </div>
+                                    </td>
+                                </tr>
+                                #end
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="layui-table-page">
+                        <div id="layui-table-page1">
+                            <div class="layui-box layui-laypage layui-laypage-default" id="layui-laypage-1">
+                                <span class="layui-laypage-count">共 $query.recordCount 条</span></div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div> ##列表结束
+
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    layui.config({
+        base : "/static/js/"
+    }).use(['form', 'table', 'layer','common'], function () {
+        var $ = layui.$,
+                form = layui.form,
+                table = layui.table,
+                layer = layui.layer,
+                common = layui.common;
+
+
+        var loading = layer.load(0,{ shade: [0.3,'#000']});
+
+
+
+        layer.close(loading);
+
+    });
+
+</script>
+<!-- 菜单状态tpl-->
+<script type="text/html" id="resStatusTpl">
+
+    {{# if(d.resStatus == 0){ }}
+    <span class="label label-success ">0-有效</span>
+    {{# } else if(d.resStatus == 1){ }}
+    <span class="label label-danger ">1-失效</span>
+    {{# } else { }}
+    {{d.resStatus}}
+    {{# }  }}
+</script>
+<!-- 菜单类型tpl-->
+<script type="text/html" id="resTypeTpl">
+
+    {{# if(d.resType == 0){ }}
+    <span class="label label-info ">0-菜单</span>
+    {{# } else if(d.resType == 1){ }}
+    <span class="label label-warning ">1-按钮</span>
+    {{# } else { }}
+    {{d.resType}}
+    {{# }  }}
+</script>
+
+<!-- 菜单级别tpl-->
+<script type="text/html" id="resLevelTpl">
+
+    {{# if(d.resLevel == 1){ }}
+    <span>1级菜单</span>
+    {{# } else if(d.resLevel == 2){ }}
+    <span>2级菜单</span>
+    {{# } else if(d.resLevel == 3){ }}
+    <span>3级菜单</span>
+    {{# } else { }}
+    {{d.resLevel}}
+    {{# }  }}
+</script>
+
+<!--工具条 -->
+<script type="text/html" id="resBar">
+    <div class="layui-btn-group">
+
+
+    </div>
+</script>
+

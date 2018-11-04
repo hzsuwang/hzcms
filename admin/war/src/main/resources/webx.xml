@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Webx Root Context Configuration. -->
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:services="http://www.alibaba.com/schema/services"
+	xmlns:request-contexts="http://www.alibaba.com/schema/services/request-contexts"
+	xmlns:session-encoders="http://www.alibaba.com/schema/services/request-contexts/session/encoders"
+	xmlns:model-encoders="http://www.alibaba.com/schema/services/request-contexts/session/model-encoders"
+	xmlns:session-idgens="http://www.alibaba.com/schema/services/request-contexts/session/idgens"
+	xmlns:session-stores="http://www.alibaba.com/schema/services/request-contexts/session/stores"
+	xmlns:ml-adapters="http://www.alibaba.com/schema/services/module-loader/adapters"
+	xmlns:ml-factories="http://www.alibaba.com/schema/services/module-loader/factories"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="
+                http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+                http://www.alibaba.com/schema/services/request-contexts http://localhost:8080/schema/services-request-contexts.xsd
+                http://www.alibaba.com/schema/services/request-contexts/session/encoders http://localhost:8080/schema/services-request-contexts-session-encoders.xsd
+                http://www.alibaba.com/schema/services/request-contexts/session/idgens http://localhost:8080/schema/services-request-contexts-session-idgens.xsd
+                http://www.alibaba.com/schema/services/request-contexts/session/stores http://localhost:8080/schema/services-request-contexts-session-stores.xsd
+                http://www.alibaba.com/schema/services/request-contexts/session/model-encoders http://localhost:8080/schema/services-request-contexts-session-model-encoders.xsd
+                http://www.alibaba.com/schema/services/module-loader/adapters http://localhost:8080/schema/services-module-loader-adapters.xsd
+                http://www.alibaba.com/schema/services/module-loader/factories http://localhost:8080/schema/services-module-loader-factories.xsd
+                http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+             ">
+
+	<!-- 支持${xxx}替换。 -->
+	<services:property-placeholder>
+		<services:property key="component">common</services:property>
+	</services:property-placeholder>
+
+	<!-- 共享配置。 -->
+	<beans:import resource="common/webx-component-and-admin.xml" />
+
+	<!-- 异常管道。 -->
+	<beans:import resource="common/pipeline-exception.xml" />
+
+	<!-- 资源装载。 -->
+	<beans:import resource="common/resources.xml" />
+
+	<!-- URI生成。 -->
+	<beans:import resource="common/uris.xml" />
+
+
+    <!-- Dal/biz配置。 -->
+    <beans:import resource="classpath:qingka/dal/data-source.xml" />
+    <beans:import resource="classpath:qingka/dal/dao.xml" />
+    <beans:import resource="classpath:applicationContext-biz.xml" />
+    <beans:import resource="classpath:applicationContext-admin-biz.xml" />
+
+
+
+
+	<!-- 综合设置。 -->
+	<services:webx-configuration>
+		<!-- 默认将productionMode设为true，建议在jetty插件中设置-DproductionMode=false。 -->
+		<services:productionMode>${productionMode}
+		</services:productionMode>
+
+	</services:webx-configuration>
+
+	<!-- 设置request/response/session。 -->
+	<services:request-contexts
+		xmlns="http://www.alibaba.com/schema/services/request-contexts">
+		<!-- basic BasicRequestContext 提供基础安全特性，例如：过滤response headers、cookies，限制cookie的大小等。
+			即使你不加说明，BasicRequestContext也总是会启用一个默认的interceptor实现：ResponseHeaderSecurityFilter。这个类实现了下列功能：
+			避免header name和value中出现CRLF字符 ── 在header中嵌入CRLF（回车换行）字符是一种常见的攻击手段。攻击者嵌入CRLF以后，使服务器对HTTP请求发生错误判断，从而执行攻击者的恶意代码。事实上，现在的servlet引擎如tomcat已经可以防御这种攻击。但作为框架，并不能依赖于特定的servlet引擎，所以加上这个额外的安全检查，确保万无一失。
+			将status message用HTML entity编码重写 ── 通常status message会被显示在HTML页面中。攻击者可以利用这一点在页面中嵌入恶意代码。将status
+			message以HTML entity编码重写以后，就可以避免这个问题。 限制cookie的总大小 ── 过大的cookie可能使WEB服务器拒绝响应请求。攻击者同样可以利用这一点使用户无法正常访问网站。限制cookie的总大小可以部分地解决这种危机。 -->
+		<basic >
+			 <request-contexts:interceptors
+            	xmlns="http://www.alibaba.com/schema/services/request-contexts/basic/interceptors">
+                <interceptor class="com.alibaba.citrus.service.requestcontext.basic.impl.ResponseHeaderSecurityFilter" />
+                <!--  interceptor class="...Interceptor2"-->
+        	</request-contexts:interceptors>
+		</basic>
+		<!--BufferedRequestContext 缓存response中的内容。 -->
+		<buffered />
+		<!--LazyCommitRequestContext 延迟提交response。 -->
+		<lazy-commit />
+		<!--ParserRequestContext 解析参数，支持multipart/form-data（即上传文件请求）。 -->
+		<parser />
+
+
+		<!-- SetLocaleRequestContext 设置locale区域和charset字符集编码。 -->
+		<set-locale defaultLocale="zh_CN" defaultCharset="UTF-8" />
+		<!-- -->
+		<session maxInactiveInterval="7200"  keepInTouch="true" forceExpirationPeriod="0" modelKey="SESSION_MODEL">
+			<id cookieEnabled="true" urlEncodeEnabled="false">
+				<cookie name="JSESSIONID" maxAge="0" path="/clearing" httpOnly="true" secure="false" />
+				<url-encode name="JSESSIONID" />
+				<session-idgens:uuid-generator />
+			</id>
+			<stores>
+				<session-stores:cookie-store id="temporaryClientStore">
+					<session-stores:cookie name="ta1" />
+				</session-stores:cookie-store>
+			</stores>
+			<store-mappings>
+				<match name="*" store="temporaryClientStore" />
+			</store-mappings>
+			<request-contexts:interceptors xmlns="http://www.alibaba.com/schema/services/request-contexts/session/interceptors">
+				<lifecycle-logger />
+				<attribute-whitelist>
+					<attribute name="_csrf_token" />
+					<attribute name="_lang" />
+				</attribute-whitelist>
+			</request-contexts:interceptors>
+		</session>
+
+
+
+
+
+
+	</services:request-contexts>
+
+	<!-- 支持上传文件。 -->
+	<services:upload sizeMax="50M" />
+
+	<!-- 将beans暴露给模板。这里定义的tools可被所有components之间共享。 -->
+	<services:pull xmlns="http://www.alibaba.com/schema/services/pull/factories">
+		<utils />
+		<page-tool />
+		<control-tool />
+		<uris-tool />
+	</services:pull>
+
+	<!-- 装载模块。 -->
+	<services:module-loader>
+		<ml-factories:class-modules>
+			<ml-factories:search-packages type="$1"
+				packages="com.qk.qingka.webx.common.module.*" />
+		</ml-factories:class-modules>
+	</services:module-loader>
+
+
+</beans:beans>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:services="http://www.alibaba.com/schema/services"
+             xmlns:uris="http://www.alibaba.com/schema/services/uris"
+             xmlns="http://www.alibaba.com/schema/services/uris"
+             xmlns:uri-interceptors="http://www.alibaba.com/schema/services/uris/interceptors"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:p="http://www.springframework.org/schema/p"
+             xsi:schemaLocation="
+                http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+                http://www.alibaba.com/schema/services/uris http://localhost:8080/schema/services-uris.xsd
+                http://www.alibaba.com/schema/services/uris/interceptors http://localhost:8080/schema/services-uris-interceptors.xsd
+                http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <services:uris>
+     
+ 		<uris:servlet-uri id="server" requestAware="true">
+            <servletPath>/</servletPath>
+        </uris:servlet-uri>
+        <uri id="lvban" exposed="true">
+            <serverURI>http://www.lvban.com/</serverURI>
+        </uri>
+        
+        <uris:turbine-uri id="homeModule" exposed="true" extends="server">
+            <componentPath>/</componentPath>
+        </uris:turbine-uri>        
+
+
+        <uris:turbine-uri id="docModule" exposed="true" extends="server">
+            <componentPath>/doc</componentPath>
+        </uris:turbine-uri>
+        <uris:turbine-uri id="adminModule" exposed="true" extends="server">
+            <componentPath>/admin</componentPath>
+        </uris:turbine-uri>
+        <uris:turbine-uri id="webModule" exposed="true" extends="server">
+            <componentPath>/web</componentPath>
+        </uris:turbine-uri>
+        
+     
+        
+        <uris:turbine-uri id="adminLogin" exposed="true" extends="adminModule">
+            <target>login/index</target>
+        </uris:turbine-uri>
+        <uris:turbine-uri id="webLogin" exposed="true" extends="webModule">
+            <target>login/index</target>
+        </uris:turbine-uri>
+        <uris:turbine-uri id="accountError" exposed="true" extends="docModule">
+            <target>account/accountError</target>
+        </uris:turbine-uri>
+    </services:uris>
+    
+ 
+
+</beans:beans>

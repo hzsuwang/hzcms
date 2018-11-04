@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Logback Configuration.  -->
+<configuration debug="false">
+
+     
+     <appender name="INFO_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${loggingRoot}/sms-info.log</file>
+		<encoding>UTF-8</encoding>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${loggingRoot}/sms-info.%d{yyyy-MM-dd}.log</FileNamePattern>
+		</rollingPolicy>
+		<append>true</append>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern><![CDATA[
+%n%-4r [%d{yyyy-MM-dd HH:mm:ss}] - %X{method} %X{requestURIWithQueryString} [ip=%X{remoteHost}, ref=%X{referrer}, ua=%X{userAgent}, sid=%X{cookie.JSESSIONID}]  %-5level %logger{35} - %m%n
+            ]]></pattern>
+        </layout>
+        <filter class="com.alibaba.citrus.logconfig.logback.LevelRangeFilter">
+            <levelMin>INFO</levelMin>
+            <levelMax>INFO</levelMax>
+        </filter>
+        
+    </appender>
+
+    <appender name="WARN_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${loggingRoot}/sms-warn.log</file>
+        <encoding>UTF-8</encoding>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${loggingRoot}/sms-warn.%d{yyyy-MM-dd}.log</FileNamePattern>
+        </rollingPolicy>
+        <append>true</append>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern><![CDATA[
+%n%-4r [%d{yyyy-MM-dd HH:mm:ss}] - %X{method} %X{requestURIWithQueryString} [ip=%X{remoteHost}, ref=%X{referrer}, ua=%X{userAgent}, sid=%X{cookie.JSESSIONID}]  %-5level %logger{35} - %m%n
+            ]]></pattern>
+        </layout>
+        <filter class="com.alibaba.citrus.logconfig.logback.LevelRangeFilter">
+            <levelMin>WARN</levelMin>
+            <levelMax>WARN</levelMax>
+        </filter>
+
+    </appender>
+     
+     
+     <appender name="PROJECT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${loggingRoot}/sms-error.log</file>
+        <encoding>UTF-8</encoding>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${loggingRoot}/sms-error.%d{yyyy-MM-dd}.log</FileNamePattern>
+		</rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern><![CDATA[
+%n%-4r [%d{yyyy-MM-dd HH:mm:ss}] - %X{method} %X{requestURIWithQueryString} [ip=%X{remoteHost}, ref=%X{referrer}, ua=%X{userAgent}, sid=%X{cookie.JSESSIONID}] %-5level %logger{35} - %m%n
+            ]]></pattern>
+            <maxHistory>90</maxHistory>
+        </layout>
+        <append>true</append>
+        
+        <filter class="com.alibaba.citrus.logconfig.logback.LevelRangeFilter">
+            <levelMin>ERROR</levelMin>
+            <levelMax>ERROR</levelMax>
+        </filter>
+    </appender>    
+    
+    <appender name="SQL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${loggingRoot}/sms-sql.log</file>
+        <encoding>UTF-8</encoding>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${loggingRoot}/sms-sql.%d{yyyy-MM-dd}.log</FileNamePattern>
+		</rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern><![CDATA[
+%n%-4r [%d{yyyy-MM-dd HH:mm:ss}] - %X{method} %X{requestURIWithQueryString}  %-5level %logger{35} - %m%n
+            ]]></pattern>
+        </layout>
+        <append>true</append>
+
+    </appender>
+    
+
+
+     <!--Daily rolling file appender -->
+	<appender name="FRAME" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${loggingRoot}/sms-frame.log</file>
+		<encoding>UTF-8</encoding>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${loggingRoot}/sms-frame.%d{yyyy-MM-dd}.log</FileNamePattern>
+		</rollingPolicy>
+		
+		<layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern><![CDATA[
+%n%-4r [%d{yyyy-MM-dd HH:mm:ss}] - %X{method} %X{requestURIWithQueryString} [ip=%X{remoteHost}, ua=%X{userAgent}, sid=%X{cookie.JSESSIONID}]%n  %-5level %logger{35} - %m%n
+            ]]></pattern>
+            <maxHistory>90</maxHistory>
+        </layout>
+       <append>true</append>
+        
+		<filter class="com.alibaba.citrus.logconfig.logback.LevelRangeFilter">
+            <levelMin>INFO</levelMin>
+        </filter>
+	</appender>
+<appender name="monitor" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${loggingRoot}/sms-time.log</File>
+        <encoding>UTF-8</encoding>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${loggingRoot}/sms-time.%d{yyyyMMdd}.log
+            </FileNamePattern>
+        </rollingPolicy>
+
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern><![CDATA[
+%n%-4r [%d{yyyy-MM-dd HH:mm:ss}] - %X{method} %X{requestURIWithQueryString} [ip=%X{remoteHost}, ref=%X{referrer}, ua=%X{userAgent}, sid=%X{cookie.JSESSIONID}]%n  %-5level %logger{35} - %m%n
+            ]]></pattern>
+            <maxHistory>90</maxHistory>
+        </layout>
+        <append>true</append>
+        <filter class="com.alibaba.citrus.logconfig.logback.LevelRangeFilter">
+            <levelMin>INFO</levelMin>
+        </filter>
+    </appender>
+    <logger name="monitor" additivity="false" level="WARN">
+        <appender-ref ref="monitor" />
+    </logger>
+
+
+    <logger name="org.apache" level="INFO">
+         <appender-ref ref="FRAME"/>
+         <appender-ref ref="INFO_LOG"/>
+    </logger>
+    
+    <logger name="java.sql" level="INFO">
+         <appender-ref ref="SQL"/>
+    </logger>
+    <logger name="com.ibatis" level="INFO">
+         <appender-ref ref="SQL"/>
+    </logger>
+
+    <logger name="org.springframework.orm" level="INFO">
+        <appender-ref ref="SQL"/>
+    </logger>
+
+
+    <logger name="org.springframework" level="INFO">
+        <appender-ref ref="FRAME"/>
+         <appender-ref ref="INFO_LOG"/>
+    </logger>
+
+    <logger name="com.alibaba.citrus.springext.support.context" level="INFO">
+        <appender-ref ref="FRAME"/>
+         <appender-ref ref="INFO_LOG"/>
+    </logger>
+
+    <logger name="com.qk.qingka" level="${loggingLevel}" />
+
+    <root>
+    	<level value="${loggingLevel}" />
+        <appender-ref ref="PROJECT" />
+        <appender-ref ref="INFO_LOG"/>
+        <appender-ref ref="WARN_LOG"/>
+    </root>
+</configuration>
