@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/admin/war/admin.war.iml" filepath="$PROJECT_DIR$/admin/war/admin.war.iml" />
       <module fileurl="file://$PROJECT_DIR$/hzcms.iml" filepath="$PROJECT_DIR$/hzcms.iml" />
+      <module fileurl="file://$PROJECT_DIR$/biz/bo/hzcms.biz.bo.iml" filepath="$PROJECT_DIR$/biz/bo/hzcms.biz.bo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/data/dal/hzcms.data.dal.iml" filepath="$PROJECT_DIR$/data/dal/hzcms.data.dal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/data/domain/qksms.data.domain.iml" filepath="$PROJECT_DIR$/data/domain/qksms.data.domain.iml" />
     </modules>
   </component>
 </project>

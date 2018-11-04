@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="admin.war" />
+        <module name="hzcms.biz.bo" />
+        <module name="hzcms.data.dal" />
+        <module name="qksms.data.domain" />
+      </profile>
+    </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="hzcms" target="1.8" />
+      <module name="admin.war" target="1.7" />
+      <module name="hzcms" target="1.5" />
+      <module name="hzcms.biz.bo" target="1.7" />
+      <module name="hzcms.data.dal" target="1.5" />
+      <module name="qksms.data.domain" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
