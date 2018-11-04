@@ -6,7 +6,7 @@ import org.nutz.dao.entity.annotation.Comment;
 import org.nutz.dao.entity.annotation.Table;
 
 @Data
-@Table("file_info")
+@Table("cms_file_info")
 public class FileInfoDO extends BaseDO {
 
     @Column("file_name")

@@ -2,6 +2,7 @@ package com.hzsuwang.hzcms.biz.bo.impl;
 
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 
 import com.hzsuwang.hzcms.common.base.BaseService;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,12 @@ public class ArticlePoolServiceImpl extends BaseService implements ArticlePoolSe
     }
 
     @Override
-    public boolean importArticle(Hashtable t) {
+    public ArticlePoolDO getByUrl(String url) {
+        return null;
+    }
+
+    @Override
+    public boolean importArticle(Map<String, Object> t) {
         return false;
     }
 

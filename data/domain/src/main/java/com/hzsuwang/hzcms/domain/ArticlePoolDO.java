@@ -6,7 +6,7 @@ import org.nutz.dao.entity.annotation.Comment;
 import org.nutz.dao.entity.annotation.Table;
 
 @Data
-@Table("article_pool")
+@Table("cms_article_pool")
 public class ArticlePoolDO extends BaseDO {
 
     @Column("title")
@@ -24,6 +24,10 @@ public class ArticlePoolDO extends BaseDO {
     @Column("source_url")
     @Comment("来源url")
     private String sourceUrl;
+
+    @Column("source_code")
+    @Comment("来源code")
+    private int    sourceCode;
 
     @Column("author")
     @Comment("作者信息")

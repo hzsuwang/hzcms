@@ -4,6 +4,7 @@ import com.hzsuwang.hzcms.domain.ArticlePoolDO;
 
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 
 public interface ArticlePoolService {
 
@@ -16,12 +17,20 @@ public interface ArticlePoolService {
     public ArticlePoolDO getById(long id);
 
     /**
+     * 采集过了不就不采集
+     * 
+     * @param url
+     * @return
+     */
+    public ArticlePoolDO getByUrl(String url);
+
+    /**
      * 导入文章
      *
      * @param t 文章内容
      * @return
      */
-    public boolean importArticle(Hashtable t);
+    public boolean importArticle(Map<String, Object> t);
 
     /**
      * 更新的文章到文章池中
