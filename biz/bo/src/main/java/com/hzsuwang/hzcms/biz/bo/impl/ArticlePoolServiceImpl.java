@@ -25,7 +25,13 @@ public class ArticlePoolServiceImpl extends BaseService implements ArticlePoolSe
 
     @Override
     public boolean importArticle(Map<String, Object> t) {
-        return false;
+        if (t == null || t.size() == 0) {
+            return false;
+        }
+        for (Map.Entry entry : t.entrySet()) {
+            logger.info(entry.getKey() + "=" + entry.getKey());
+        }
+        return true;
     }
 
     @Override
